@@ -19,3 +19,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('saf-bundle', [App\Http\Controllers\SafBundleController::class, 'index']);
+
+// Password Reset Routes
+Route::post('password/reset-link', [App\Http\Controllers\Auth\PasswordResetController::class, 'sendResetLink']);

@@ -30,6 +30,9 @@ class PasswordResetController extends Controller
             ], 422);
         }
 
+        print_r($request->all());
+        exit;
+
         try {
             $user = \App\Models\User::where('email', $request->email)->first();
 

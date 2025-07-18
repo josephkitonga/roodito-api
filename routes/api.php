@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Auth\PasswordResetController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -21,4 +23,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('saf-bundle', [App\Http\Controllers\SafBundleController::class, 'index']);
 
 // Password Reset Routes 
-Route::post('password/reset-link', [App\Http\Controllers\Auth\PasswordResetController::class, 'sendResetLink']);
+Route::post('password/reset-link', [PasswordResetController::class, 'sendResetLink']);

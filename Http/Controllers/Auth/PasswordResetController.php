@@ -46,7 +46,8 @@ class PasswordResetController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Failed to send password reset email'
+                'message' => 'Failed to send password reset email',
+                'error' => $e->getMessage()
             ], 500);
         }
     }

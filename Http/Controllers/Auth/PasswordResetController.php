@@ -20,7 +20,7 @@ class PasswordResetController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'email' => 'required|email|exists:users,email',
-            'remember_token' => 'required',
+            // 'remember_token' => 'required',
         ]);
 
         if ($validator->fails()) {

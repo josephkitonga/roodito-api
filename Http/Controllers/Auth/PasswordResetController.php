@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
+use App\Models\User;
+
 class PasswordResetController extends Controller
 {
     /**
@@ -34,7 +36,7 @@ class PasswordResetController extends Controller
         exit;
 
         try {
-            $user = \App\Models\User::where('email', $request->email)->first();
+            $user = User::where('email', $request->email)->first();
 
             print_r($user);
             exit;

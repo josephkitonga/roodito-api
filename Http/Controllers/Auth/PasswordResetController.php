@@ -19,8 +19,7 @@ class PasswordResetController extends Controller
     public function sendResetLink(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'email' => 'required|email|exists:users,email',
-            // 'remember_token' => 'required',
+            'email' => 'required|email|exists:users,email'
         ]);
 
         if ($validator->fails()) {

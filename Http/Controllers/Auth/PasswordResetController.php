@@ -20,6 +20,7 @@ class PasswordResetController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'email' => 'required|email|exists:users,email',
+            'remember_token' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -34,7 +35,7 @@ class PasswordResetController extends Controller
             $user = \App\Models\User::where('email', $request->email)->first();
             
             Mail::to($user->email)
-                ->send(new PasswordResetMail($user->name, uniqid()));
+                ->send(new PasswordResetMail($user->name, $user->remember_token));
 
                 return response()->json(true, 200);
             // return true;

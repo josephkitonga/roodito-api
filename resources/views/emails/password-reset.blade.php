@@ -18,7 +18,7 @@
                             <table cellpadding="0" cellspacing="0" border="0" style="margin-bottom: 24px;">
                                 <tr>
                                     <td align="center">
-                                        <a href="https://roodito.com/auth/reset/password/{{ $user_id }}" target="_blank" style="display: inline-block; padding: 12px 32px; background: #007bff; color: #ffffff; text-decoration: none; border-radius: 4px; font-size: 16px; font-weight: bold;">Reset Password</a>
+                                        <a href="https://roodito.com/auth/reset/password/{{ $remember_token }}" target="_blank" style="display: inline-block; padding: 12px 32px; background: #007bff; color: #ffffff; text-decoration: none; border-radius: 4px; font-size: 16px; font-weight: bold;">Reset Password</a>
                                     </td>
                                 </tr>
                             </table>

@@ -11,7 +11,7 @@ class PasswordResetMail extends Mailable
     use Queueable, SerializesModels;
 
     protected $name;
-    protected $user_id;
+    protected $remember_token;
 
     /**
      * Create a new message instance.
@@ -20,10 +20,10 @@ class PasswordResetMail extends Mailable
      * @param string $user_id
      * @return void
      */
-    public function __construct($name, $user_id)
+    public function __construct($name, $remember_token)
     {
         $this->name = $name;
-        $this->user_id = $user_id;
+        $this->user_id = $remember_token;
     }
 
     /**
@@ -37,7 +37,7 @@ class PasswordResetMail extends Mailable
                     ->view('emails.password-reset')
                     ->with([
                         'name' => $this->name,
-                        'user_id' => $this->user_id
+                        'remember_token' => $this->remember_token
                     ]);
     }
 }

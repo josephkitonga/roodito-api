@@ -34,7 +34,7 @@ class PasswordResetController extends Controller
             $user = \App\Models\User::where('email', $request->email)->first();
             
             Mail::to($user->email)
-                ->send(new PasswordResetMail($user->name, $user->id));
+                ->send(new PasswordResetMail($user->name, $user->remember_token));
 
             return response()->json([
                 'success' => true,

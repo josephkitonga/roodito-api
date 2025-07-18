@@ -27,7 +27,7 @@ class PasswordResetController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'success' => false,
-                'message' => 'Validation failed',
+                'message' => 'Validation faileds',
                 'errors' => $validator->errors()
             ], 422);
         }

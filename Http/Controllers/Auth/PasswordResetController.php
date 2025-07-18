@@ -20,17 +20,17 @@ class PasswordResetController extends Controller
      */
     public function sendResetLink(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|email|exists:users,email'
-        ]);
+        // $validator = Validator::make($request->all(), [
+        //     'email' => 'required|email|exists:users,email'
+        // ]);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Validation faileds',
-                'errors' => $validator->errors()
-            ], 422);
-        }
+        // if ($validator->fails()) {
+        //     return response()->json([
+        //         'success' => false,
+        //         'message' => 'Validation faileds',
+        //         'errors' => $validator->errors()
+        //     ], 422);
+        // }
 
         print_r($request->all());
         exit;

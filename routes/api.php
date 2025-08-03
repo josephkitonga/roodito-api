@@ -40,3 +40,9 @@ Route::middleware('api.token')->group(function () {
     Route::get('me', [UsersController::class, 'me']);
     Route::apiResource('users', UsersController::class);
 });
+
+// Public update route for testing (remove in production)
+Route::put('users/{user}/update', [UsersController::class, 'update']);
+
+// Simple test route
+Route::put('test-update/{id}', [UsersController::class, 'update']);

@@ -251,6 +251,7 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // Try to find user by ID (works for both route model binding and manual ID)
         $user = User::find($id);
 
         if (!$user) {
@@ -308,11 +309,21 @@ class UsersController extends Controller
             }
         }
 
-        $user->update($validated);
+        // Log the data before update
+        $beforeUpdate = $user->toArray();
+
+        // Perform the update
+        $updateResult = $user->update($validated);
+
+        // Refresh the user to get the updated data
+        $user->refresh();
+
+        $afterUpdate = $user->toArray();
 
         return response()->json([
             'success' => true,
-            'data' => $user
+            'message' => 'User updated successfully',
+            'data' => $user->toArray()
         ]);
     }
 

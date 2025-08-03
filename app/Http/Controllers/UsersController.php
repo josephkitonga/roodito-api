@@ -72,7 +72,7 @@ class UsersController extends Controller
         }
 
         // Check password (using sha1 as per existing code)
-        if (sha1($validated['password']) !== $user->password) {
+        if (sha1($validated['password']) != $user->password) {
             return response()->json([
                 'success' => false,
                 'message' => 'Invalid credentials. Password is incorrect.'

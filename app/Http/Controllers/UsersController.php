@@ -163,7 +163,7 @@ class UsersController extends Controller
 
         // Process parent phone number if provided
         $parentPhone = null;
-        if (!empty($validated['parent_phone_number'])) {
+        if (!empty($validated['parent_phone_number'] ?? null)) {
             $parentPhoneRaw = filter_var($validated['parent_phone_number'], FILTER_SANITIZE_NUMBER_INT);
             if (preg_match('/(^(0|254|\+?254)7(\d){8}$)/', $parentPhoneRaw)) {
                 $parentPhone = '254' . substr($parentPhoneRaw, -9);
@@ -177,7 +177,7 @@ class UsersController extends Controller
 
         $user = User::create([
             'name' => $validated['name'],
-            'middle_name' => $validated['middle_name'],
+            'middle_name' => $validated['middle_name'] ?? null,
             'last_name' => $validated['last_name'],
             'username' => $validated['username'],
             'user_type' => 'de8786ddf7c161',
@@ -185,7 +185,7 @@ class UsersController extends Controller
             'phone_number' => $phone_str,
             'dob' => $validated['dob'],
             'parent_phone_number' => $parentPhone,
-            'parent_email' => $validated['parent_email'],
+            'parent_email' => $validated['parent_email'] ?? null,
             'password' => sha1($validated['password']),
         ]);
 
@@ -269,7 +269,7 @@ class UsersController extends Controller
 
         // Process parent phone number if provided
         if (isset($validated['parent_phone_number'])) {
-            if (!empty($validated['parent_phone_number'])) {
+            if (!empty($validated['parent_phone_number'] ?? null)) {
                 $parentPhoneRaw = filter_var($validated['parent_phone_number'], FILTER_SANITIZE_NUMBER_INT);
                 if (preg_match('/(^(0|254|\+?254)7(\d){8}$)/', $parentPhoneRaw)) {
                     $validated['parent_phone_number'] = '254' . substr($parentPhoneRaw, -9);

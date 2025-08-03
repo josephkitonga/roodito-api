@@ -82,18 +82,20 @@ class UsersController extends Controller
         // Generate API token
         $apiToken = Str::random(60);
 
-        // Update user with new API token and login status
-        $user->update([
-            'api_token' => $apiToken,
-            'is_logged_in' => 1,
-            'last_login' => now(),
-        ]);
+        // Update user with new API token and login status using direct assignment
+        $user->api_token = $apiToken;
+        $user->is_logged_in = 1;
+        $user->last_login = now();
+        $user->save();
+
+        // Refresh the user to get the updated data
+        $user->refresh();
 
         return response()->json([
             'success' => true,
             'message' => 'Login successful',
             'data' => [
-                'user' => $user,
+                'user' => $user->toArray(),
                 'api_token' => $apiToken
             ]
         ]);
@@ -114,11 +116,13 @@ class UsersController extends Controller
             $user = User::where('api_token', $token)->first();
 
             if ($user) {
-                $user->update([
-                    'api_token' => null,
-                    'is_logged_in' => false,
-                    'last_logout' => now(),
-                ]);
+                $user->api_token = null;
+                $user->is_logged_in = 0;
+                $user->last_logout = now();
+                $user->save();
+
+                // Refresh the user to get the updated data
+                $user->refresh();
             }
         }
 

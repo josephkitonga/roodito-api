@@ -176,6 +176,7 @@ class UsersController extends Controller
         }
 
         $user = User::create([
+            'user_id' => Str::uuid(),
             'name' => $validated['name'],
             'middle_name' => $validated['middle_name'] ?? null,
             'last_name' => $validated['last_name'],

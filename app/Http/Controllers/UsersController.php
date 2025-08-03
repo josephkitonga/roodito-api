@@ -181,7 +181,7 @@ class UsersController extends Controller
         }
 
         $user = User::create([
-            'user_id' => Str::uuid(),
+            'user_id' => time(),
             'name' => $validated['name'],
             'middle_name' => $validated['middle_name'] ?? null,
             'last_name' => $validated['last_name'],
@@ -218,7 +218,7 @@ class UsersController extends Controller
         $user->save();
 
         // Use raw SQL to set password to bypass Laravel's hashing
-        DB::table('users')->where('id', $user->id)->update(['password' => sha1($validated['password']), 'user_id' => Str::uuid()]);
+        DB::table('users')->where('id', $user->id)->update(['password' => sha1($validated['password']), 'user_id' => time()]);
 
         // Refresh the user to get all the data from database
         $user->refresh();

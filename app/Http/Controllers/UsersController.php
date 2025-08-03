@@ -188,11 +188,34 @@ class UsersController extends Controller
             'parent_phone_number' => $parentPhone,
             'parent_email' => $validated['parent_email'] ?? null,
             'password' => sha1($validated['password']),
+            'admin_id' => 1,
+            'school_system_id' => 1,
+            'school_level_id' => 1,
+            'otp_verified' => 0,
+            'confirmed' => 0,
+            'is_logged_in' => 0,
+            'exam_quiz_free_acc' => 0,
+            'class_level' => null,
+            'level_id' => 1,
+            'platform_id' => 1,
+            'gender_id' => 1,
+            'activation_status' => 'active',
+            'verification_code' => null,
+            'referral_code' => null,
+            'reset' => null,
+            'state' => 'active',
+            'account_type' => 'student',
+            'introducer' => null,
+            'price_package_id' => 1,
         ]);
+
+        // Refresh the user to get all the data from database
+        $user->refresh();
 
         return response()->json([
             'success' => true,
-            'data' => $user
+            'message' => 'User created successfully',
+            'data' => $user->toArray()
         ], 201);
     }
 

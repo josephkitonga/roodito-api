@@ -61,7 +61,6 @@ class User extends Authenticatable
         'exam_quiz_free_acc',
         'introducer',
         'price_package_id',
-        'exam_body',
         'updated_at',
         'created_at'
     ];
@@ -83,4 +82,87 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Boot the model and set default values
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($user) {
+            // Set default values for required fields
+            if (empty($user->admin_id)) {
+                $user->admin_id = 1;
+            }
+            if (empty($user->school_system_id)) {
+                $user->school_system_id = 1;
+            }
+            if (empty($user->school_level_id)) {
+                $user->school_level_id = 1;
+            }
+            if (empty($user->otp_verified)) {
+                $user->otp_verified = 0;
+            }
+            if (empty($user->confirmed)) {
+                $user->confirmed = 0;
+            }
+            if (empty($user->is_logged_in)) {
+                $user->is_logged_in = 0;
+            }
+            if (empty($user->exam_quiz_free_acc)) {
+                $user->exam_quiz_free_acc = 0;
+            }
+            // Set default values for other required fields
+            if (empty($user->class_level)) {
+                $user->class_level = null;
+            }
+            if (empty($user->level_id)) {
+                $user->level_id = 1;
+            }
+            if (empty($user->platform_id)) {
+                $user->platform_id = 1;
+            }
+            if (empty($user->gender_id)) {
+                $user->gender_id = 1;
+            }
+            if (empty($user->activation_status)) {
+                $user->activation_status = 'active';
+            }
+            if (empty($user->verification_code)) {
+                $user->verification_code = null;
+            }
+            if (empty($user->referral_code)) {
+                $user->referral_code = null;
+            }
+            if (empty($user->reset)) {
+                $user->reset = null;
+            }
+            if (empty($user->state)) {
+                $user->state = 'active';
+            }
+            if (empty($user->account_type)) {
+                $user->account_type = 'student';
+            }
+            if (empty($user->introducer)) {
+                $user->introducer = null;
+            }
+            if (empty($user->price_package_id)) {
+                $user->price_package_id = 1;
+            }
+            if (empty($user->exam_body)) {
+                $user->exam_body = null;
+            }
+            // Set null for nullable fields that might cause issues
+            if (!isset($user->parent_phone_number)) {
+                $user->parent_phone_number = null;
+            }
+            if (!isset($user->parent_email)) {
+                $user->parent_email = null;
+            }
+            if (!isset($user->middle_name)) {
+                $user->middle_name = null;
+            }
+        });
+    }
 }

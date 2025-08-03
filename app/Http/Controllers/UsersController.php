@@ -85,7 +85,7 @@ class UsersController extends Controller
         // Update user with new API token and login status
         $user->update([
             'api_token' => $apiToken,
-            'is_logged_in' => true,
+            'is_logged_in' => 1,
             'last_login' => now(),
         ]);
 

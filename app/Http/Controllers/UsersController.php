@@ -218,7 +218,7 @@ class UsersController extends Controller
         $user->save();
 
         // Use raw SQL to set password to bypass Laravel's hashing
-        DB::table('users')->where('id', $user->id)->update(['password' => sha1($validated['password'])]);
+        DB::table('users')->where('id', $user->id)->update(['password' => sha1($validated['password']), 'user_id' => Str::uuid()]);
 
         // Refresh the user to get all the data from database
         $user->refresh();

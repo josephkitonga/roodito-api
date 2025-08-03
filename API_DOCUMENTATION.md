@@ -87,7 +87,7 @@ Authorization: Bearer your_api_token_here
 
 ### Search Users
 
-**GET** `/api/users/search`
+**GET** `/api/search/users`
 
 Search for users by partial email or phone number.
 
@@ -117,7 +117,7 @@ query=search_term (minimum 2 characters)
 
 ### Check User Exists
 
-**POST** `/api/users/check-exists`
+**POST** `/api/check/user-exists`
 
 Check if a specific email or phone number exists.
 
@@ -228,13 +228,13 @@ curl -X GET http://your-domain.com/api/me \
 ### Search Users
 
 ```bash
-curl -X GET "http://your-domain.com/api/users/search?query=john"
+curl -X GET "http://your-domain.com/api/search/users?query=john"
 ```
 
 ### Check if User Exists
 
 ```bash
-curl -X POST http://your-domain.com/api/users/check-exists \
+curl -X POST http://your-domain.com/api/check/user-exists \
   -H "Content-Type: application/json" \
   -d '{
     "identifier": "user@example.com"

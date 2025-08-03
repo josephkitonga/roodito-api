@@ -29,6 +29,7 @@ Route::post('password/reset-link', [PasswordResetController::class, 'sendResetLi
 // Authentication Routes
 Route::post('login', [UsersController::class, 'login']);
 Route::post('logout', [UsersController::class, 'logout']);
+Route::post('register', [UsersController::class, 'store']);
 
 // User Search Routes (Public - no authentication required)
 Route::get('search/users', [UsersController::class, 'search']);

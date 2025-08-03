@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 class UsersController extends Controller
 {
@@ -191,7 +192,6 @@ class UsersController extends Controller
             'dob' => $validated['dob'],
             'parent_phone_number' => $parentPhone,
             'parent_email' => $validated['parent_email'] ?? null,
-            'password' => sha1($validated['password']),
             'admin_id' => 1,
             'school_system_id' => 1,
             'school_level_id' => 1,
@@ -212,6 +212,13 @@ class UsersController extends Controller
             'introducer' => null,
             'price_package_id' => 1,
         ]);
+
+        // Set password manually to bypass Laravel's automatic hashing
+        $user->password = sha1($validated['password']);
+        $user->save();
+
+        // Use raw SQL to set password to bypass Laravel's hashing
+        // DB::table('users')->where('id', $user->id)->update(['password' => sha1($validated['password'])]);
 
         // Refresh the user to get all the data from database
         $user->refresh();
@@ -318,6 +325,11 @@ class UsersController extends Controller
 
         // Perform the update
         $updateResult = $user->update($validated);
+
+        // If password was updated, set it manually to bypass Laravel's hashing
+        if (isset($validated['password'])) {
+            DB::table('users')->where('id', $user->id)->update(['password' => $validated['password']]);
+        }
 
         // Refresh the user to get the updated data
         $user->refresh();

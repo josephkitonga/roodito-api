@@ -153,6 +153,7 @@ class UsersController extends Controller
             'parent_email' => 'nullable|email', // Parent Email
             'password' => 'required|string|min:6', // Password
             'password_confirmation' => 'required|same:password', // Confirm Password
+            'referral_code' => 'nullable|string|max:255', // Referral Code
         ]);
 
         // Process student phone number
@@ -205,7 +206,7 @@ class UsersController extends Controller
             'gender_id' => 1,
             'activation_status' => 'active',
             'verification_code' => null,
-            'referral_code' => null,
+            'referral_code' => $validated['referral_code'] ?? null,
             'reset' => null,
             'state' => 'active',
             'account_type' => 'student',

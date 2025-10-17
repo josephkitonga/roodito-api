@@ -182,7 +182,7 @@ class UsersController extends Controller
         }
 
         $user = User::create([
-            'user_id' => substr(uniqid(), 0, 10),
+            'user_id' => substr(uniqid(), 0, 11),
             'name' => $validated['name'],
             'middle_name' => $validated['middle_name'] ?? null,
             'last_name' => $validated['last_name'],
@@ -212,10 +212,11 @@ class UsersController extends Controller
             'account_type' => 'student',
             'introducer' => null,
             'price_package_id' => 1,
+            'password' => sha1($validated['password']),
         ]);
 
         // Set password manually to bypass Laravel's automatic hashing
-        $user->password = sha1($validated['password']);
+        // $user->password = sha1($validated['password']);
         $user->save();
 
         // Use raw SQL to set password to bypass Laravel's hashing

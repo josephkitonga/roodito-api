@@ -32,6 +32,8 @@ class User extends Authenticatable
         'parent_email',
         'admin_id',
         'password',
+        'activation_status',
+        'state'
     ];
 
     /**
